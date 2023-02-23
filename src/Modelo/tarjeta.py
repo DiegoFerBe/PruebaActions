@@ -1,12 +1,12 @@
-from sqlalchemy import Column, Integer, String
-from .elementoconclave import ElementoConClave
+from sqlalchemy import Column, Integer, String, Date
+from elementoConClave import ElementoConClave
 
 class Tarjeta(ElementoConClave):
 
-  numero = Column(Int)
+  numero = Column(Integer)
   titular = Column(String)
   fechaVencimiento = Column(Date)
-  cvv = Column(Int)
+  cvv = Column(Integer)
   direccion = Column(String)
   telefono = Column(String)
   nota = Column(String)

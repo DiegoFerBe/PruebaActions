@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from .elementoconclave import ElementoConClave
+from elementoConClave import ElementoConClave
 
 class Secreto(ElementoConClave):
 

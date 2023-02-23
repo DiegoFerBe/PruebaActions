@@ -1,6 +1,8 @@
 from sqlalchemy import Column, Integer, String
 from .declarative_base import Base
 
+from sqlalchemy.orm import relationship
+
 class ClavesFavoritas(Base):
 
   __tablename__ = 'clavesFavoritas'
@@ -9,3 +11,4 @@ class ClavesFavoritas(Base):
   clave = Column(String)
   confirmacionClave = Column(String)
   pista = Column(String)
+  elementoTiene = relationship('Elemento Con Clave', cascade='all')
