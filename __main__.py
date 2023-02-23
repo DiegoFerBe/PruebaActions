@@ -9,3 +9,4 @@ if __name__ == '__main__':
 
     app = App_CajaDeSeguridad(sys.argv, logica)
     sys.exit(app.exec_())
+    
