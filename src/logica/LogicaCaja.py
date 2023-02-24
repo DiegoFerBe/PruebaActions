@@ -6,3 +6,6 @@ class LogicaCaja:
            return True
        else:
            return False
+
+   def ver_claves_favoritas(self):
+       return None
