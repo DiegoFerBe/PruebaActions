@@ -11,4 +11,8 @@ class ClavesFavoritas(Base):
   clave = Column(String)
   confirmacionClave = Column(String)
   pista = Column(String)
-  elementoTiene = relationship('Elemento Con Clave', cascade='all')
+  #elementoTiene = relationship('Elemento Con Clave', cascade='all')
+
+  def __str__(self):
+    return f'{self.id} {self.nombre} {self.clave}'
+
