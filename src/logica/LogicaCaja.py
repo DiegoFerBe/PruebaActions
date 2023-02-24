@@ -8,4 +8,4 @@ class LogicaCaja:
            return False
 
    def ver_claves_favoritas(self):
-       return None
+       return []
