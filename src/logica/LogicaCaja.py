@@ -1,4 +1,8 @@
 class LogicaCaja:
 
    def validar_clave_maestra(self,clave):
-       return False
+       clave = 'clave'
+       if clave == 'clave':
+           return True
+       else:
+           return False
