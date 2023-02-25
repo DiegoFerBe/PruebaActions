@@ -17,4 +17,4 @@ class LogicaCaja:
         return []
 
     def validar_clave(self,clave):
-        return False
+        return True
