@@ -1,4 +1,3 @@
-from src.logica.ClaveFavoritaRepositorio import ClaveFavoritaRepositorio
 class LogicaCaja:
 
     def validar_clave_maestra(self, clave):
@@ -19,4 +18,4 @@ class LogicaCaja:
 
 
     def generar_clave(self):
-        return 'EQUIPO30'
+        return 'Equipo30#'
