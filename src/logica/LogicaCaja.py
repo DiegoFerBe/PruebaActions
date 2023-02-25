@@ -15,3 +15,6 @@ class LogicaCaja:
 
     def ver_elementos(self):
         return []
+
+    def validar_clave(self,clave):
+        return False

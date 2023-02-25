@@ -19,3 +19,7 @@ class TestLogicaCaja(unittest.TestCase):
     def test_ver_elementos(self):
         elementos = LogicaCaja.ver_elementos(self)
         self.assertEqual(elementos, [])
+
+    def test_validar_clave(self):
+        clave = LogicaCaja.validar_clave(self,'123Equipo30#')
+        self.assertEqual(clave,True)
