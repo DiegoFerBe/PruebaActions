@@ -15,3 +15,7 @@ class TestLogicaCaja(unittest.TestCase):
     def test_crear_clave_favorita(self):
         crearClaveFavorita = LogicaCaja.crear_clave_favorita(self, 'prueba','erferfre','erferfre','la pista')
         self.assertEqual(crearClaveFavorita, True)
+
+    def test_ver_elementos(self):
+        elementos = LogicaCaja.ver_elementos(self)
+        self.assertEqual(elementos, [])

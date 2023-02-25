@@ -12,3 +12,6 @@ class LogicaCaja:
 
     def crear_clave_favorita(self, nombre, clave, confirmacion, pista):
         return True
+
+    def ver_elementos(self):
+        return None
