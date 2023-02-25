@@ -14,4 +14,4 @@ class LogicaCaja:
         return True
 
     def ver_elementos(self):
-        return None
+        return []
