@@ -20,6 +20,7 @@ class TestLogicaCaja(unittest.TestCase):
         elementos = LogicaCaja.ver_elementos(self)
         self.assertEqual(elementos, [])
 
-    def test_validar_clave(self):
-        clave = LogicaCaja.validar_clave(self,'123Equipo30#')
-        self.assertEqual(clave,True)
+    def test_generar_clave(self):
+        claveGenerada = LogicaCaja.generar_clave(self)
+        self.assertRegex(claveGenerada,r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[? - * ! @ # $ / () {} = . , '
+                                       r'; :]).{8,15}$')
