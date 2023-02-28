@@ -1,3 +1,5 @@
+import re
+import random
 from src.logica.ClaveFavoritaRepositorio import ClaveFavoritaRepositorio
 class LogicaCaja:
 
@@ -19,4 +21,21 @@ class LogicaCaja:
 
 
     def generar_clave(self):
-        return 'EQUIPO30'
+        global cadena
+        REGEX = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[? - * ! @ # $ / () {} = . , ; :]).{8,15}$'
+        patron = re.compile(REGEX)
+        minusculas = 'abcdefghijklmnopqrstuvwxyz'
+        mayusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        especiales = '*-_@'
+        numeros = '1234567890'
+
+        flag = True
+
+        while flag:
+
+            cadena = ''.join(random.choices(minusculas + mayusculas + especiales + numeros, k=12))
+
+            if patron.fullmatch(cadena):
+                flag = False
+
+        return cadena
