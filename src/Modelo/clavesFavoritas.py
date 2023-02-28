@@ -9,7 +9,7 @@ class ClavesFavoritas(Base):
   id = Column(Integer, primary_key=True)
   nombre = Column(String)
   clave = Column(String)
-  confirmacionClave = Column(String)
+  #confirmacionClave = Column(String)
   pista = Column(String)
   #elementoTiene = relationship('Elemento Con Clave', cascade='all')
 

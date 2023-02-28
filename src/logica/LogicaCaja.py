@@ -14,7 +14,7 @@ class LogicaCaja:
         return []
 
     def crear_clave_favorita(self, nombre, clave, confirmacion, pista):
-        return True
+        return ClaveFavoritaRepositorio.guardar_clave_favorita(self, nombre=nombre, clave=clave, pista=pista)
 
     def ver_elementos(self):
         return []
