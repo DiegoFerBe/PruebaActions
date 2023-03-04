@@ -41,4 +41,4 @@ class LogicaCaja:
         return cadena
 
     def ver_reporte_seguridad(self):
-        return {}
+        return {'logins':10, 'ids':10, 'tarjetas': 5, 'secretos':2, 'inseguras':3, 'avencer': 1, 'masdeuna': 1, 'nivel': 0.6}
