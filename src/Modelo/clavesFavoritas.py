@@ -1,18 +1,19 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+from src.Modelo.login import Login
+
 from .declarative_base import Base
 
-from sqlalchemy.orm import relationship
 
 class ClavesFavoritas(Base):
+    __tablename__ = 'clavesFavoritas'
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String)
+    clave = Column(String)
+    # confirmacionClave = Column(String)
+    pista = Column(String)
 
-  __tablename__ = 'clavesFavoritas'
-  id = Column(Integer, primary_key=True)
-  nombre = Column(String)
-  clave = Column(String)
-  #confirmacionClave = Column(String)
-  pista = Column(String)
-  #elementoTiene = relationship('Elemento Con Clave', cascade='all')
+    logins = relationship('Login', cascade='all')
 
-  def __str__(self):
-    return f'{self.id} {self.nombre} {self.clave}'
-
+    def __str__(self):
+        return f'{self.id} {self.nombre} {self.clave}'
