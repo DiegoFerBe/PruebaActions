@@ -39,3 +39,6 @@ class LogicaCaja:
                 flag = False
 
         return cadena
+
+    def ver_reporte_seguridad(self):
+        return {}
