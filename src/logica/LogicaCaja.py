@@ -31,7 +31,7 @@ class LogicaCaja(FachadaCajaDeSeguridad):
         return loQueVoyARetornar
 
 
-    def crear_clave_favorita(self, nombre, clave, confirmacion, pista):
+    def crear_clave_favorita(self, nombre, clave, pista):
         return ClaveFavoritaRepositorio.guardar_clave_favorita(self, nombre=nombre, clave=clave, pista=pista)
 
     def ver_elementos(self):
