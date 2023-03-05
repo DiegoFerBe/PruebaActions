@@ -1,6 +1,6 @@
 from sqlalchemy.exc import SQLAlchemyError
-from src.Modelo.declarative_base import engine, Base, session
-from src.Modelo.clavesFavoritas import ClavesFavoritas
+from src.modelo.declarative_base import engine, Base, session
+from src.modelo.clavesFavoritas import ClavesFavoritas
 
 
 class ClaveFavoritaRepositorio:
@@ -22,3 +22,7 @@ class ClaveFavoritaRepositorio:
         clavesFavoritas = session.query(ClavesFavoritas).all()
         session.close()
         return clavesFavoritas
+
+    def traer_clave_por_id(self,id):
+        claveTraida = session.query(ClavesFavoritas).get(id).__dict__
+        return claveTraida

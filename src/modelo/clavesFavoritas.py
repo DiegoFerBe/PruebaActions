@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from src.Modelo.login import Login
+from src.modelo.login import Login
 
 from .declarative_base import Base
 
@@ -13,7 +13,7 @@ class ClavesFavoritas(Base):
     # confirmacionClave = Column(String)
     pista = Column(String)
 
-    logins = relationship('Login', cascade='all')
+    #logins = relationship('Login', cascade='all')
 
     def __str__(self):
         return f'{self.id} {self.nombre} {self.clave}'

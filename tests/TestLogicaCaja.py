@@ -1,6 +1,6 @@
 import unittest
 from src.logica.LogicaCaja import LogicaCaja
-from src.Modelo.declarative_base import Session
+from src.modelo.declarative_base import Session
 
 
 class TestLogicaCaja(unittest.TestCase):

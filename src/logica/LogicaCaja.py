@@ -1,7 +1,13 @@
 import re
 import random
 from src.logica.ClaveFavoritaRepositorio import ClaveFavoritaRepositorio
-class LogicaCaja:
+from src.logica.FachadaCajaDeSeguridad import FachadaCajaDeSeguridad
+
+
+class LogicaCaja(FachadaCajaDeSeguridad):
+
+    def dar_claveMaestra(self):
+        return 'clave'
 
     def validar_clave_maestra(self, clave):
         clave = 'clave'
@@ -10,8 +16,20 @@ class LogicaCaja:
         else:
             return False
 
-    def ver_claves_favoritas(self):
-        return ClaveFavoritaRepositorio.ver_claves_favoritas(self)
+    def dar_claves_favoritas(self):
+        misclaves = ClaveFavoritaRepositorio.ver_claves_favoritas(self)
+        loQueVoyARetornar=[]
+
+        for clave in misclaves:
+            misc = {
+                'nombre': clave.nombre,
+                'clave': clave.clave,
+                'pista': clave.pista
+            }
+            loQueVoyARetornar.append(misc)
+
+        return loQueVoyARetornar
+
 
     def crear_clave_favorita(self, nombre, clave, confirmacion, pista):
         return ClaveFavoritaRepositorio.guardar_clave_favorita(self, nombre=nombre, clave=clave, pista=pista)
