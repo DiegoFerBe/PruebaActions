@@ -62,4 +62,12 @@ class LogicaCaja(FachadaCajaDeSeguridad):
         return {'logins':10, 'ids':10, 'tarjetas': 5, 'secretos':2, 'inseguras':3, 'avencer': 1, 'masdeuna': 1, 'nivel': 0.6}
 
     def crearLogin(self, nombre, email, usuario, password, url, notas):
-        return False
+        elemento = {
+            "nombre": nombre,
+            "email": email,
+            "usuario": usuario,
+            "password": password,
+            "url": url,
+            "notas": notas
+        }
+        return elemento
