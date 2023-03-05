@@ -57,6 +57,23 @@ class TestLogicaCaja(unittest.TestCase):
             {'logins': 10, 'ids': 10, 'tarjetas': 5, 'secretos': 2, 'inseguras': 3, 'avencer': 1, 'masdeuna': 1,
              'nivel': 0.6}, logicaCaja)
 
+    def testCrearLogin(self):
+        nombre = self.data_factory.word()
+        email = self.data_factory.email()
+        usuario = self.data_factory.user_name()
+        password = self.data_factory.password()
+        url = self.data_factory.url()
+        notas = self.data_factory.text()
+
+        elemento = self.logicCaja.crearLogin(nombre, email, usuario, password, url, notas)
+
+        self.assertEqual(elemento["nombre"], nombre)
+        self.assertEqual(elemento["email"], email)
+        self.assertEqual(elemento["usuario"], usuario)
+        self.assertEqual(elemento["password"], password)
+        self.assertEqual(elemento["url"], url)
+        self.assertEqual(elemento["notas"], notas)
+
 
 
 
