@@ -18,3 +18,6 @@ class Elemento(Base):
     nombre = Column(String)
     tipo = Column(Enum(Tipo))
     nota = Column(String)
+
+    def __str__(self):
+        return f'{self.id} {self.nombre} {self.tipo} '

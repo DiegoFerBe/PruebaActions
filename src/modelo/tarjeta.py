@@ -1,13 +1,17 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey
-from elemento import Elemento
-from declarative_base import Base
+from src.modelo.elemento import Elemento
 
-class Tarjeta(Base):
 
-  numero = Column(Integer)
-  titular = Column(String)
-  fechaVencimiento = Column(Date)
-  cvv = Column(Integer)
-  direccion = Column(String)
-  telefono = Column(String)
-  claveFavorita_id = Column(Integer, ForeignKey('clavesFavoritas.id'))
+class Tarjeta(Elemento):
+    __tablename__ = 'tarjetas'
+
+    id = Column(Integer, ForeignKey('elementos.id'), primary_key=True)
+
+    numero = Column(Integer)
+    titular = Column(String)
+    clave = Column(String)
+    fechaVencimiento = Column(Date)
+    cvv = Column(Integer)
+    direccion = Column(String)
+    telefono = Column(String)
+    claveFavorita_id = Column(Integer, ForeignKey('clavesFavoritas.id'))
