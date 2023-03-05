@@ -24,5 +24,5 @@ class ClaveFavoritaRepositorio:
         return clavesFavoritas
 
     def traer_clave_por_id(self,id):
-        claveTraida = session.query(ClavesFavoritas).get(id).__dict__
+        claveTraida = session.query(ClavesFavoritas).get(id)
         return claveTraida
