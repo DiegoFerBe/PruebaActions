@@ -8,7 +8,7 @@ class ClaveFavoritaRepositorio:
     def __init__(self):
         Base.metadata.create_all(engine)
 
-    def guardar_clave_favorita(self,nombre, clave, pista):
+    def guardar_clave_favorita(self, nombre, clave, pista):
         try:
             c = ClavesFavoritas(nombre=nombre, clave=clave, pista=pista)
             session.add(c)
@@ -23,6 +23,23 @@ class ClaveFavoritaRepositorio:
         session.close()
         return clavesFavoritas
 
-    def traer_clave_por_id(self,id):
+    def traer_clave_por_id(self, id):
         claveTraida = session.query(ClavesFavoritas).get(id)
         return claveTraida
+
+    def editar_clave_favorita(self, id, nombre, clave, pista):
+        try:
+            claveRecuperada = self.traer_clave_por_id(id)
+            if claveRecuperada==None:
+                return False
+            if len(nombre) > 1:
+                claveRecuperada.nombre = nombre
+            if len(clave) > 1:
+                claveRecuperada.clave = clave
+            claveRecuperada.pista = pista
+
+            session.commit()
+            session.close()
+            return True
+        except SQLAlchemyError:
+            return False

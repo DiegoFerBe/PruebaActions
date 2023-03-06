@@ -61,6 +61,9 @@ class LogicaCaja(FachadaCajaDeSeguridad):
     def ver_reporte_seguridad(self):
         return {'logins':10, 'ids':10, 'tarjetas': 5, 'secretos':2, 'inseguras':3, 'avencer': 1, 'masdeuna': 1, 'nivel': 0.6}
 
+    def editar_clave(self,nombre,clave,pista):
+        return False
+
     def crearLogin(self, nombre, email, usuario, password, url, notas):
         elemento = {
             "nombre": nombre,

@@ -74,6 +74,20 @@ class TestLogicaCaja(unittest.TestCase):
         self.assertEqual(elemento["url"], url)
         self.assertEqual(elemento["notas"], notas)
 
+    def test_editar_clave(self):
+        nuevoNombre = self.data_factory.word()
+        nuevaPista = self.data_factory.text()
+        nuevaClave = self.data_factory.password()
+
+        respuesta = self.logicCaja.editar_clave(nuevoNombre,nuevaClave,nuevaPista)
+
+        self.assertTrue(respuesta,True)
+
+
+
+
+
+
 
 
 
