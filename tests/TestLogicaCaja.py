@@ -10,7 +10,6 @@ from src.modelo.clavesFavoritas import ClavesFavoritas
 class TestLogicaCaja(unittest.TestCase):
 
     def setUp(self):
-
         self.Base = Base
 
         self.Base.metadata.create_all(engine)
@@ -21,7 +20,8 @@ class TestLogicaCaja(unittest.TestCase):
 
         self.data_factory = Faker()
 
-        self.initClaveFavorita = ClavesFavoritas(nombre=self.data_factory.name(),clave=self.data_factory.password(),pista=self.data_factory.text())
+        self.initClaveFavorita = ClavesFavoritas(nombre=self.data_factory.name(), clave=self.data_factory.password(),
+                                                 pista=self.data_factory.text())
 
         self.session.add(self.initClaveFavorita)
 
@@ -79,21 +79,11 @@ class TestLogicaCaja(unittest.TestCase):
         nuevaPista = self.data_factory.text()
         nuevaClave = self.data_factory.password()
 
-        respuesta = self.logicCaja.editar_clave(nuevoNombre,nuevaClave,nuevaPista)
+        respuesta = self.logicCaja.editar_clave(1, nuevoNombre, nuevaClave, nuevaPista)
 
-        self.assertTrue(respuesta,True)
-
-
-
-
-
-
-
-
-
+        self.assertTrue(respuesta, True)
 
     def tearDown(self):
-
         self.session = Session()
 
         busqueda = self.session.query(ClavesFavoritas).all()
