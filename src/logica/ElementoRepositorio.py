@@ -16,6 +16,17 @@ class ElementoRepositorio:
     def dar_elementos(self):
         return session.query(Elemento).all()
 
+    def dar_login_elementos(self):
+        return session.query(Login).all()
+
+    def traer_login_por_id(self, id):
+        elementoTraido = session.query(Login).filter_by(id=id).first()
+        return elementoTraido
+
+    def traer_identificacion_por_id(self, id):
+        elementoTraido = session.query(Identificacion).filter_by(id=id).first()
+        return elementoTraido
+
     def traer_elemento_por_id(self, id):
         elementoTraido = session.query(Elemento).get(id).__dict__
         return elementoTraido
@@ -25,7 +36,7 @@ class ElementoRepositorio:
         claveTraida = claveRepositorio.traer_clave_por_id(claveFavorita)
 
         login = Login(nombre=nombre,tipo=Tipo.LOGIN,nota=nota, email=email, usuario=usuario, url=url, clave=clave,
-                      claveFavorita_id=claveTraida)
+                      claveFavorita_id=claveTraida.id)
 
         session.add(login)
         session.commit()

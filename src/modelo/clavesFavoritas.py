@@ -14,7 +14,7 @@ class ClavesFavoritas(Base):
     clave = Column(String)
     pista = Column(String)
 
-    logins = relationship('Login', cascade='all')
+    logins = relationship('Login', backref="clavesFavoritas")
     #secretos = relationship('Secreto', cascade='all')
     #tarjetas = relationship('Tarjeta', cascade='all')
 

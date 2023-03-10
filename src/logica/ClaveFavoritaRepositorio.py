@@ -24,8 +24,7 @@ class ClaveFavoritaRepositorio:
         return clavesFavoritas
 
     def traer_clave_por_id(self, id):
-        claveTraida = session.query(ClavesFavoritas).get(id)
-        return claveTraida
+        return session.query(ClavesFavoritas).get(id)
 
     def editar_clave_favorita(self, id, nombre, clave, pista):
         try:
