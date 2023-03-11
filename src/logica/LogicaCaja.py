@@ -98,6 +98,17 @@ class LogicaCaja(FachadaCajaDeSeguridad):
 
         return listaRetornada
 
+    def dar_elemento(self, id_elemento):
+        elemento = ElementoRepositorio().traer_elemento_por_id(id_elemento)
+        if elemento.tipo.value == 'Login':
+            return ElementoRepositorio().traer_login_por_id(elemento.id)
+        elif elemento.tipo.value == 'Secreto':
+            return ElementoRepositorio().traer_secreto_por_id(elemento.id)
+        elif elemento.tipo.value == 'Tarjeta':
+            return ElementoRepositorio().traer_tarjeta_por_id(elemento.id)
+        elif elemento.tipo.value == 'Identificacion':
+            return ElementoRepositorio().traer_identificacion_por_id(elemento.id)
+
     def generar_clave(self):
         global cadena
         REGEX = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[? - * ! @ # $ / () {} = . , ; :]).{8,15}$'
