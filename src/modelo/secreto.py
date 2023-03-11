@@ -8,4 +8,4 @@ class Secreto(Elemento):
 
     id = Column(Integer, ForeignKey('elementos.id'), primary_key=True)
     secreto = Column(String)
-    claveFavorita_id = Column(Integer, ForeignKey('clavesFavoritas.id'))
+    claveFavorita_id = Column(Integer, ForeignKey('clavesFavoritas.id'),nullable=False)

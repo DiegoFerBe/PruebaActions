@@ -14,4 +14,4 @@ class Tarjeta(Elemento):
     cvv = Column(Integer)
     direccion = Column(String)
     telefono = Column(String)
-    claveFavorita_id = Column(Integer, ForeignKey('clavesFavoritas.id'))
+    claveFavorita_id = Column(Integer, ForeignKey('clavesFavoritas.id'),nullable=False)
