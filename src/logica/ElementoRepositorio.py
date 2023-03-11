@@ -1,3 +1,5 @@
+from sqlalchemy.exc import SQLAlchemyError
+
 from src.modelo.declarative_base import Base, engine, session
 from src.modelo.elemento import Elemento, Tipo
 from src.logica.ClaveFavoritaRepositorio import ClaveFavoritaRepositorio
@@ -32,15 +34,18 @@ class ElementoRepositorio:
         return elementoTraido
 
     def guardar_Login_elemento(self,nombre,nota, email, usuario, url, clave, claveFavorita):
-        claveRepositorio = ClaveFavoritaRepositorio()
-        claveTraida = claveRepositorio.traer_clave_por_id(claveFavorita)
+        try:
+            claveRepositorio = ClaveFavoritaRepositorio()
+            claveTraida = claveRepositorio.traer_clave_por_id(claveFavorita)
 
-        login = Login(nombre=nombre,tipo=Tipo.LOGIN,nota=nota, email=email, usuario=usuario, url=url, clave=clave,
+            login = Login(nombre=nombre,tipo=Tipo.LOGIN,nota=nota, email=email, usuario=usuario, url=url, clave=clave,
                       claveFavorita_id=claveTraida.id)
-
-        session.add(login)
-        session.commit()
-        session.close()
+            session.add(login)
+            session.commit()
+            session.close()
+            return True
+        except SQLAlchemyError:
+            return False
 
     def guardar_identificacion_elemento(self,nombre,nota, numero, nombreCompleto, fechaNacimiento, fechaExpedicion, fechaVencimiento,telefono):
         fechaNacimiento=datetime.strptime(fechaNacimiento, '%Y-%m-%d').date()
@@ -55,9 +60,12 @@ class ElementoRepositorio:
         session.close()
 
     def guardar_secreto_elemento(self,nombre,nota,secreto,clavefavorita):
-        secreto = Secreto(nombre=nombre,nota=nota,secreto=secreto,claveFavorita_id=clavefavorita)
-
-        session.add(secreto)
-        session.commit()
-        session.close()
+        try:
+            secreto = Secreto(nombre=nombre,nota=nota,secreto=secreto,claveFavorita_id=clavefavorita)
+            session.add(secreto)
+            session.commit()
+            session.close()
+            return True
+        except SQLAlchemyError:
+            return False
 
