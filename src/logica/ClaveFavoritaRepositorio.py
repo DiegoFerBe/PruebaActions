@@ -1,4 +1,4 @@
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from src.modelo.declarative_base import engine, Base, session
 from src.modelo.clavesFavoritas import ClavesFavoritas
 
@@ -42,3 +42,12 @@ class ClaveFavoritaRepositorio:
             return True
         except SQLAlchemyError:
             return False
+
+    def eliminar_clave_favorita(self,id_clave):
+        try:
+            clave_a_borrar = session.query(ClavesFavoritas).get(id_clave)
+            session.delete(clave_a_borrar)
+            session.commit()
+            session.close()
+        except IntegrityError:
+            print("La clave esta asociada a un elemento. Primero se debe quitar el vinculo")
