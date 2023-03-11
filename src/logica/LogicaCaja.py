@@ -3,6 +3,7 @@ import random
 from src.logica.ClaveFavoritaRepositorio import ClaveFavoritaRepositorio
 from src.logica.ElementoRepositorio import ElementoRepositorio
 from src.logica.FachadaCajaDeSeguridad import FachadaCajaDeSeguridad
+from datetime import date
 
 
 class LogicaCaja(FachadaCajaDeSeguridad):
@@ -138,3 +139,82 @@ class LogicaCaja(FachadaCajaDeSeguridad):
 
     def crearLogin(self, nombre, email, usuario, password, url, notas, id_claveFavorita):
         return ElementoRepositorio().guardar_Login_elemento(nombre, email, usuario, password, url, notas, id_claveFavorita)
+
+    def ver_reporte_seguridad(self):
+
+        cantLogins = len(ElementoRepositorio().dar_login_elementos())
+        cantTarjetas = len(ElementoRepositorio().dar_tarjeta_elementos())
+        cantSecretos = len(ElementoRepositorio().dar_secreto_elementos())
+        cantIdentificaciones = len(ElementoRepositorio().dar_identificacion_elementos())
+        cantClaves = len(ClaveFavoritaRepositorio().ver_claves_favoritas())
+        inseguras = 0
+        avencer = 0
+        masdeuna = 0
+        masdetres = False
+        fechaActual = date.today()
+
+        clavesFavoritas = ClaveFavoritaRepositorio().ver_claves_favoritas()
+
+        REGEX = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[? - * ! @ # $ / () {} = . , ; :]).{8,15}$'
+        patron = re.compile(REGEX)
+
+        for clave in clavesFavoritas:
+            if not patron.fullmatch(clave.clave):
+                inseguras += 1
+
+        identificaciones = ElementoRepositorio().dar_identificacion_elementos()
+        tarjetas = ElementoRepositorio().dar_tarjeta_elementos()
+        logins = ElementoRepositorio().dar_login_elementos()
+        secretos = ElementoRepositorio().dar_secreto_elementos()
+
+        historialClaves = []
+
+        for identificacion in identificaciones:
+            if (identificacion.fechaVencimiento - fechaActual).days < 90:
+                avencer += 1
+
+        for tarjeta in tarjetas:
+            historialClaves.append(tarjeta.claveFavorita_id)
+            if (tarjeta.fechaVencimiento - fechaActual).days < 90:
+                avencer += 1
+
+        for secreto in secretos:
+            historialClaves.append(secreto.claveFavorita_id)
+
+        for login in logins:
+            historialClaves.append(login.claveFavorita_id)
+
+        clavesUsadas = set(historialClaves)
+
+        for usadas in clavesUsadas:
+            contador = 0
+            for historial in historialClaves:
+                if usadas == historial:
+                    contador += 1
+                    if contador == 2:
+                        masdeuna += 1
+                    elif contador > 3:
+                        masdetres = True
+                        break
+
+        SC = ((cantClaves - inseguras) / cantClaves) * 100
+
+        V = ((cantIdentificaciones + cantTarjetas - avencer) / cantIdentificaciones + cantTarjetas) * 100
+
+        R = 100
+
+        if masdetres:
+            R = 0
+        elif masdeuna > 0:
+            R = 50
+
+        nivel = SC * 0.5 + V * 0.2 + R * 0.3
+
+        return {'logins': cantLogins, 'ids': cantIdentificaciones, 'tarjetas': cantTarjetas, 'secretos': cantSecretos,
+                'inseguras': inseguras, 'avencer': avencer, 'masdeuna': masdeuna, 'nivel': nivel}
+
+
+
+
+
+
