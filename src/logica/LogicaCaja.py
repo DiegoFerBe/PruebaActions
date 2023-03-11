@@ -7,6 +7,9 @@ from src.logica.FachadaCajaDeSeguridad import FachadaCajaDeSeguridad
 
 class LogicaCaja(FachadaCajaDeSeguridad):
 
+    def __init__(self):
+        self.clave_maestra = 'clave'
+
     def dar_claveMaestra(self):
         return 'clave'
 
@@ -32,7 +35,7 @@ class LogicaCaja(FachadaCajaDeSeguridad):
         return loQueVoyARetornar
 
     def crear_clave_favorita(self, nombre, clave, pista):
-        return ClaveFavoritaRepositorio.guardar_clave_favorita(self, nombre=nombre, clave=clave, pista=pista)
+        return ClaveFavoritaRepositorio().guardar_clave_favorita(nombre, clave, pista)
 
     def dar_elementos(self):
         listaRetornada = []
@@ -43,22 +46,48 @@ class LogicaCaja(FachadaCajaDeSeguridad):
                 clave = ClaveFavoritaRepositorio().traer_clave_por_id(login.claveFavorita_id)
                 listaRetornada.append({"nombre_elemento:": login.nombre,
                                        "tipo:": login.tipo.value,
-                                       "notas:": login.nota,
                                        "email": login.email,
                                        "usuario": login.usuario,
                                        "clave": clave.nombre,
-                                       "url": login.url
+                                       "url": login.url,
+                                       "notas:": login.nota
                                        })
             elif el.tipo.value == 'Identificacion':
                 iden = ElementoRepositorio().traer_identificacion_por_id(el.id)
                 listaRetornada.append({"nombre_elemento:": iden.nombre,
                                        "tipo:": iden.tipo.value,
                                        "numero": iden.numero,
-                                       "nombre":iden.nombre,
-                                       "fecha_nacimiento":iden.fechaNacimiento.__str__(),
-                                       "fecha_exp":iden.fechaExpedicion.__str__(),
-                                       "fecha_venc":iden.fechaVencimiento.__str__(),
-                                       "nota:": iden.nota
+                                       "nombre": iden.nombre,
+                                       "fecha_nacimiento": iden.fechaNacimiento.__str__(),
+                                       "fecha_exp": iden.fechaExpedicion.__str__(),
+                                       "fecha_venc": iden.fechaVencimiento.__str__(),
+                                       "notas:": iden.nota
+
+                                       })
+            elif el.tipo.value == 'Secreto':
+                secret = ElementoRepositorio().traer_secreto_por_id(el.id)
+                clave = ClaveFavoritaRepositorio().traer_clave_por_id(secret.claveFavorita_id)
+                listaRetornada.append({"nombre_elemento:": secret.nombre,
+                                       "tipo:": secret.tipo.value,
+                                       "secreto": secret.secreto,
+                                       "clave": clave.nombre,
+                                       "notas:": secret.nota
+
+                                       })
+
+            elif el.tipo.value == 'Tarjeta':
+                tarjeta = ElementoRepositorio().traer_tarjeta_por_id(el.id)
+                clave = ClaveFavoritaRepositorio().traer_clave_por_id(tarjeta.claveFavorita_id)
+                listaRetornada.append({"nombre_elemento:": tarjeta.nombre,
+                                       "tipo:": tarjeta.tipo.value,
+                                       "numero": tarjeta.numero,
+                                       "titular": tarjeta.titular,
+                                       "fecha_venc": tarjeta.fechaVencimiento,
+                                       "ccv": tarjeta.cvv,
+                                       "clave": clave.nombre,
+                                       "direccion":tarjeta.direccion,
+                                       "telefono":tarjeta.telefono,
+                                       "notas:": tarjeta.nota
 
                                        })
 
@@ -92,4 +121,4 @@ class LogicaCaja(FachadaCajaDeSeguridad):
         return ClaveFavoritaRepositorio().editar_clave_favorita(id, nombre, clave, pista)
 
     def crearLogin(self, nombre, email, usuario, password, url, notas, id_claveFavorita):
-        return ElementoRepositorio().guardar_Login_elemento(nombre, email, usuario, password, url, notas, id_claveFavorita_id)
+        return ElementoRepositorio().guardar_Login_elemento(nombre, email, usuario, password, url, notas, id_claveFavorita)
