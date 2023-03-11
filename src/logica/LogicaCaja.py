@@ -34,6 +34,11 @@ class LogicaCaja(FachadaCajaDeSeguridad):
 
         return loQueVoyARetornar
 
+    def dar_clave_favorita(self, id_clave):
+        clave = ClaveFavoritaRepositorio().traer_clave_por_id(id_clave)
+        if clave is not None:
+            return {'nombre': clave.nombre, 'clave': clave.clave, 'pista': clave.pista}
+
     def crear_clave_favorita(self, nombre, clave, pista):
         return ClaveFavoritaRepositorio().guardar_clave_favorita(nombre, clave, pista)
 
