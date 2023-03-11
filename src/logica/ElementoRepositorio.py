@@ -8,6 +8,7 @@ from src.modelo.login import Login
 from datetime import datetime
 
 from src.modelo.secreto import Secreto
+from src.modelo.tarjeta import Tarjeta
 
 
 class ElementoRepositorio:
@@ -21,12 +22,29 @@ class ElementoRepositorio:
     def dar_login_elementos(self):
         return session.query(Login).all()
 
+    def dar_secreto_elementos(self):
+        return session.query(Secreto).all()
+
+    def dar_identificacion_elementos(self):
+        return session.query(Identificacion).all()
+
+    def dar_tarjeta_elementos(self):
+        return session.query(Tarjeta).all()
+
     def traer_login_por_id(self, id):
         elementoTraido = session.query(Login).filter_by(id=id).first()
         return elementoTraido
 
     def traer_identificacion_por_id(self, id):
         elementoTraido = session.query(Identificacion).filter_by(id=id).first()
+        return elementoTraido
+
+    def traer_secreto_por_id(self, id):
+        elementoTraido = session.query(Secreto).filter_by(id=id).first()
+        return elementoTraido
+
+    def traer_tarjeta_por_id(self, id):
+        elementoTraido = session.query(Tarjeta).filter_by(id=id).first()
         return elementoTraido
 
     def traer_elemento_por_id(self, id):
@@ -59,9 +77,24 @@ class ElementoRepositorio:
         session.commit()
         session.close()
 
+    def guardar_tarjeta_elemento(self,nombre,nota,numero,titular,clave,fechaVencimiento,cvv,direccion,telefono,clavefavorita):
+        try:
+            claveRepositorio = ClaveFavoritaRepositorio()
+            claveTraida = claveRepositorio.traer_clave_por_id(clavefavorita)
+            tarjeta = Secreto(nombre=nombre,tipo=Tipo.TARJETA,nota=nota,numero=numero,titular=titular,clave=clave,fechaVencimiento=fechaVencimiento,
+                              cvv=cvv,direccion=direccion,telefono=telefono,claveFavorita_id=claveTraida.id)
+            session.add(tarjeta)
+            session.commit()
+            session.close()
+            return True
+        except SQLAlchemyError:
+            return False
+
     def guardar_secreto_elemento(self,nombre,nota,secreto,clavefavorita):
         try:
-            secreto = Secreto(nombre=nombre,nota=nota,secreto=secreto,claveFavorita_id=clavefavorita)
+            claveRepositorio = ClaveFavoritaRepositorio()
+            claveTraida = claveRepositorio.traer_clave_por_id(clavefavorita)
+            secreto = Secreto(nombre=nombre,tipo=Tipo.SECRETO,nota=nota,secreto=secreto,claveFavorita_id=claveTraida.id)
             session.add(secreto)
             session.commit()
             session.close()
@@ -69,3 +102,16 @@ class ElementoRepositorio:
         except SQLAlchemyError:
             return False
 
+    def eliminar_elemento(self,id_elemento):
+        elemento=session.query(Elemento).get(id_elemento)
+        if elemento.tipo.value =='Login':
+            elemento_borrar=session.query(Login).get(id_elemento)
+        elif elemento.tipo.value =='Identificacion':
+            elemento_borrar = session.query(Identificacion).get(id_elemento)
+        elif elemento.tipo.value =='Secreto':
+            elemento_borrar = session.query(Secreto).get(id_elemento)
+        elif elemento.tipo.value =='Tarjeta':
+            elemento_borrar = session.query(Tarjeta).get(id_elemento)
+        session.delete(elemento_borrar)
+        session.commit()
+        session.close()
