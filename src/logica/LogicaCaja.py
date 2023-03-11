@@ -91,13 +91,5 @@ class LogicaCaja(FachadaCajaDeSeguridad):
     def editar_clave(self, id, nombre, clave, pista):
         return ClaveFavoritaRepositorio().editar_clave_favorita(id, nombre, clave, pista)
 
-    def crearLogin(self, nombre, email, usuario, password, url, notas):
-        elemento = {
-            "nombre": nombre,
-            "email": email,
-            "usuario": usuario,
-            "password": password,
-            "url": url,
-            "notas": notas
-        }
-        return elemento
+    def crearLogin(self, nombre, email, usuario, password, url, notas, claveFavorita_id):
+        return ElementoRepositorio().guardar_Login_elemento(nombre, email, usuario, password, url, notas, claveFavorita_id)
