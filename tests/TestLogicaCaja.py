@@ -5,6 +5,7 @@ import random
 from src.logica.LogicaCaja import LogicaCaja
 from src.modelo.declarative_base import Session, Base, engine
 from src.modelo.clavesFavoritas import ClavesFavoritas
+from src.modelo.elemento import Elemento
 
 
 class TestLogicaCaja(unittest.TestCase):
@@ -43,7 +44,7 @@ class TestLogicaCaja(unittest.TestCase):
         self.assertEqual(crearClaveFavorita, True)
 
     def test_ver_elementos(self):
-        elementos = LogicaCaja.ver_elementos(self)
+        elementos = LogicaCaja().dar_elementos()
         self.assertEqual(elementos, [])
 
     def test_generar_clave(self):
@@ -86,9 +87,13 @@ class TestLogicaCaja(unittest.TestCase):
     def tearDown(self):
         self.session = Session()
 
-        busqueda = self.session.query(ClavesFavoritas).all()
+        busquedaClaves = self.session.query(ClavesFavoritas).all()
+        busquedaElementos = self.session.query(Elemento).all()
 
-        for clave in busqueda:
+        for elemento in busquedaElementos:
+            self.session.delete(elemento)
+
+        for clave in busquedaClaves:
             self.session.delete(clave)
 
         self.session.commit()
