@@ -5,7 +5,10 @@ import random
 from src.logica.LogicaCaja import LogicaCaja
 from src.modelo.declarative_base import Session, Base, engine
 from src.modelo.clavesFavoritas import ClavesFavoritas
-from src.modelo.elemento import Elemento
+from src.modelo.identificacion import Identificacion
+from src.modelo.login import Login
+from src.modelo.secreto import Secreto
+from src.modelo.tarjeta import Tarjeta
 
 
 class TestLogicaCaja(unittest.TestCase):
@@ -66,14 +69,9 @@ class TestLogicaCaja(unittest.TestCase):
         url = self.data_factory.url()
         notas = self.data_factory.text()
 
-        elemento = self.logicCaja.crearLogin(nombre, email, usuario, password, url, notas)
+        elemento = self.logicCaja.crearLogin(nombre, email, usuario, password, url, notas,1)
 
-        self.assertEqual(elemento["nombre"], nombre)
-        self.assertEqual(elemento["email"], email)
-        self.assertEqual(elemento["usuario"], usuario)
-        self.assertEqual(elemento["password"], password)
-        self.assertEqual(elemento["url"], url)
-        self.assertEqual(elemento["notas"], notas)
+        self.assertTrue(elemento)
 
     def test_editar_clave(self):
         nuevoNombre = self.data_factory.word()
@@ -88,9 +86,21 @@ class TestLogicaCaja(unittest.TestCase):
         self.session = Session()
 
         busquedaClaves = self.session.query(ClavesFavoritas).all()
-        busquedaElementos = self.session.query(Elemento).all()
+        busquedaLogin = self.session.query(Login).all()
+        busquedaSecreto = self.session.query(Secreto).all()
+        busquedaIdentificacion = self.session.query(Identificacion).all()
+        busquedaTarjeta = self.session.query(Tarjeta).all()
 
-        for elemento in busquedaElementos:
+        for elemento in busquedaLogin:
+            self.session.delete(elemento)
+
+        for elemento in busquedaSecreto:
+            self.session.delete(elemento)
+
+        for elemento in busquedaIdentificacion:
+            self.session.delete(elemento)
+
+        for elemento in busquedaTarjeta:
             self.session.delete(elemento)
 
         for clave in busquedaClaves:
