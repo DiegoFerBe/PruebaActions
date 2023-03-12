@@ -3,6 +3,13 @@ on:
   push:
     branches:
       [feature_action]
+
+permissions:
+  contents: read
+  pull-requests: write
+  packages: read
+  issues: write
+
 jobs:
   pruebas:
     runs-on: ubuntu-latest
@@ -30,5 +37,5 @@ jobs:
       uses: tukasz/direct-merge-action@master
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        source-branch: feature_action
+        source-branch: ${{ github.ref }}
         target-branch: develop
