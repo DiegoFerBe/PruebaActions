@@ -33,5 +33,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
         source-branch: ${{ github.ref }}
         target-branch: develop
-        commit-message: "Integracion de funcionalidad desde ${{ github.ref }}"
+        commit-message: "INTEGRACION de funcionalidad desde ${{ github.ref }}"
 
