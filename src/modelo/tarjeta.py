@@ -9,7 +9,6 @@ class Tarjeta(Elemento):
 
     numero = Column(Integer)
     titular = Column(String)
-    clave = Column(String)
     fechaVencimiento = Column(Date)
     cvv = Column(Integer)
     direccion = Column(String)
