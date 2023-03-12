@@ -1,4 +1,4 @@
-name: Comprobando feature realizada
+name: Creando release
 on:
   push:
     branches:
