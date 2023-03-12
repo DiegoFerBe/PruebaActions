@@ -1,13 +1,15 @@
 name: Creacion de release para desplegar en main
 on:
-  push:
-    branches:
-      - develop
-
+  workflow_run:
+    workflows:
+      - "Comprobando feature realizada para enviar a develop"
+    types:
+      - completed
 jobs:
   pruebas:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, 'INTEGRACION') }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.head_commit.message, 'INTEGRACION') }}
+    steps:
     steps:
     - name: Checkout de repositorio
       uses: actions/checkout@v2
