@@ -26,8 +26,9 @@ jobs:
       run: |
           coverage run -m unittest tests/TestLogicaCaja.py
           coverage report -m
-    - name: Merge feature into develop
-      if: ${{ success() }}
-      run: |
-        git checkout develop
-        git merge feature
+    - name: Mezcla rama1 -> rama2
+      uses: tukasz/direct-merge-action@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        source-branch: feature_action
+        target-branch: develop
