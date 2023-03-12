@@ -25,11 +25,3 @@ jobs:
       run: |
           coverage run -m unittest tests/TestLogicaCaja.py
           coverage report -m
-    - name: Merge to develop
-      if: success()
-      uses: pullreminders/merge-action@v6.0.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        method: merge
-        branch: develop
-
