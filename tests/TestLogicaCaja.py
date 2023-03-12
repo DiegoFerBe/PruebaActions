@@ -78,7 +78,7 @@ class TestLogicaCaja(unittest.TestCase):
 
         respuesta = self.logicCaja.editar_clave(1, nuevoNombre, nuevaClave, nuevaPista)
 
-        self.assertTrue(respuesta, True)
+        self.assertTrue(False, True)
 
     def tearDown(self):
         self.session = Session()
