@@ -8,8 +8,6 @@ from datetime import date
 
 class LogicaCaja(FachadaCajaDeSeguridad):
 
-    def crear_clave(self, nombre, clave, pista):
-        pass
 
     def validar_crear_editar_clave(self, nombre, clave, pista):
         pass
