@@ -28,11 +28,11 @@ jobs:
         pip install -r requirements.txt
     - name: Correr pruebas
       id: correr-pruebas
-      run: python -m unittest -v tests/TesLogicaCaja.py
+      run: python -m unittest -v tests/TestLogicaCaja.py
     - name: Cálculo de cubrimiento
       id: cubrimiento
       run: |
-          coverage run -m unittest tests/TesLogicaCaja.py
+          coverage run -m unittest tests/TestLogicaCaja.py
           coverage report -m
   automerge:
     name: Automerge
