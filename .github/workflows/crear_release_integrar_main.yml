@@ -1,4 +1,4 @@
-name: Creando release
+name: Creacion de release para desplegar en main
 on:
   push:
     branches:

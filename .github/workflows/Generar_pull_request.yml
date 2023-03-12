@@ -1,4 +1,4 @@
-name: Comprobando feature realizada
+name: Comprobando feature realizada para enviar a develop
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
 jobs:
   pruebas:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, 'FIXED') }}
+    if: ${{ contains(github.event.head_commit.message, 'SOLUCIONADO') }}
     steps:
     - name: Checkout de repositorio
       uses: actions/checkout@v2
