@@ -1,8 +1,8 @@
-name: Pruebas
+name: Comprobando feature realizada
 on:
   push:
     branches:
-      [feature_action]
+      - feature**
 
 permissions:
   contents: read
