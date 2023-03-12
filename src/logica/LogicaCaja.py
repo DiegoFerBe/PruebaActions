@@ -9,9 +9,6 @@ from datetime import date
 class LogicaCaja(FachadaCajaDeSeguridad):
 
 
-    def validar_crear_editar_login(self, id, nombre, email, usuario, password, url, notas):
-        pass
-
     def editar_login(self, id, nombre, email, usuario, password, url, notas):
         pass
 
