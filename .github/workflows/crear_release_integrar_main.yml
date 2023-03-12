@@ -33,7 +33,18 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         branch: 'release'
-    - name: Correr pruebas ${{ github.ref }}
+    - name: Checkout a release
+      uses: actions/checkout@v2
+      with:
+        ref: release
+    - name: Merge develop -> release
+      uses: tukasz/direct-merge-action@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        source-branch: develop
+        target-branch: release
+    - name: Correr pruebas release
+      if: success()
       id: pruebas-integracion
       run: python -m unittest -v tests/TestLogicaCaja.py
     - name: Cálculo de cubrimiento
@@ -41,7 +52,7 @@ jobs:
       run: |
         coverage run -m unittest tests/TestLogicaCaja.py
         coverage report -m
-    - name: Merge ${{ github.ref }} -> main
+    - name: Merge release -> main
       if: success()
       uses: tukasz/direct-merge-action@master
       with:
