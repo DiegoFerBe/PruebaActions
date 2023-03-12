@@ -8,7 +8,7 @@ on:
 jobs:
   pruebas:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.head_commit.message, 'INTEGRACION') }}
+    if: ${{ github.event.workflow_run.conclusion == 'success'}}
     steps:
     - name: Checkout de repositorio
       uses: actions/checkout@v2
