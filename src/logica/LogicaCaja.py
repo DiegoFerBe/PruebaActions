@@ -9,9 +9,6 @@ from datetime import date
 class LogicaCaja(FachadaCajaDeSeguridad):
 
 
-    def eliminar_clave(self, id):
-        pass
-
     def __init__(self):
         self.clave_maestra = 'clave'
 

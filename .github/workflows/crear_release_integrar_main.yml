@@ -27,6 +27,8 @@ jobs:
           coverage run -m unittest tests/TestLogicaCaja.py
           coverage report -m
     - name: Crear rama release
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
       run: |
         git checkout -b release
         git push -f -u origin release
