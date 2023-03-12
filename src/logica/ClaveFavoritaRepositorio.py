@@ -49,5 +49,6 @@ class ClaveFavoritaRepositorio:
             session.delete(clave_a_borrar)
             session.commit()
             session.close()
+            return True
         except IntegrityError:
             print("La clave esta asociada a un elemento. Primero se debe quitar el vinculo")
