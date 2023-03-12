@@ -1,4 +1,4 @@
-name: Creando release
+name: Creacion de release para desplegar en main
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
 jobs:
   pruebas:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, 'Integracion') }}
+    if: ${{ contains(github.event.head_commit.message, 'INTEGRACION') }}
     steps:
     - name: Checkout de repositorio
       uses: actions/checkout@v2
@@ -28,12 +28,14 @@ jobs:
           coverage run -m unittest tests/TestLogicaCaja.py
           coverage report -m
     - name: Crear rama release
+      if: success()
       uses: peterjgrainger/action-create-branch@v2.2.0
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         branch: 'release'
     - name: Checkout a release
+      if: success()
       uses: actions/checkout@v2
       with:
         ref: release
