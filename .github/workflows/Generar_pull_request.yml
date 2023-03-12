@@ -1,7 +1,7 @@
 name: Hola mundo
 on:
   push:
-    branches: [ feature_caso6 ]
+    branches: [develop]
 jobs:
   Mi-primer-job:
     name: Mi primer job
