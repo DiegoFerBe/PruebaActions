@@ -69,7 +69,7 @@ class TestLogicaCaja(unittest.TestCase):
         url = self.data_factory.url()
         notas = self.data_factory.text()
 
-        elemento = self.logicCaja.crearLogin(nombre, email, usuario, password, url, notas,1)
+        elemento = self.logicCaja.crear_login(nombre, email, usuario, password, url, notas,1)
 
         self.assertTrue(elemento)
 

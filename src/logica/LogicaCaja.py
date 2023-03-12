@@ -133,9 +133,11 @@ class LogicaCaja(FachadaCajaDeSeguridad):
     def editar_clave(self, id, nombre, clave, pista):
         return ClaveFavoritaRepositorio().editar_clave_favorita(id, nombre, clave, pista)
 
-    def crearLogin(self, nombre, email, usuario, password, url, notas, id_claveFavorita):
-        return ElementoRepositorio().guardar_Login_elemento(nombre, email, usuario, password, url, notas, id_claveFavorita)
+    def crear_login(self, nombre, email, usuario, password, url, notas, id_claveFavorita):
+        if not all([nombre, email, usuario, password, url, notas]):
+            raise ValueError("Todos los campos deben tener un valor.")
 
+        return ElementoRepositorio().guardar_Login_elemento(nombre, email, usuario, password, url, notas, id_claveFavorita)
     def ver_reporte_seguridad(self):
 
         cantLogins = len(ElementoRepositorio().dar_login_elementos())
