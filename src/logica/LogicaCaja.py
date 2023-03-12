@@ -131,6 +131,9 @@ class LogicaCaja(FachadaCajaDeSeguridad):
         return cadena
 
     def editar_clave(self, id, nombre, clave, pista):
+        if not all([id, nombre, clave, pista]):
+            raise ValueError("Todos los campos deben tener un valor.")
+
         return ClaveFavoritaRepositorio().editar_clave_favorita(id, nombre, clave, pista)
 
     def crear_login(self, nombre, email, usuario, password, url, notas, id_claveFavorita):
