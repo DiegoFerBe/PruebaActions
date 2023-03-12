@@ -1,0 +1,36 @@
+name: Pull Request on Keyword
+
+on:
+  push:
+    branches:
+      - feature/**
+
+jobs:
+  keyword-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Check for keyword
+        run: |
+          if: ${{ contains(github.event.head_commit.message, 'FIX') }} then
+            echo "Keyword found. Creating Pull Request to develop branch"
+            git config --global user.email "actions@github.com"
+            git config --global user.name "GitHub Actions"
+            git checkout develop
+            git merge ${{ github.head_ref }}
+            git push --set-upstream origin develop
+          fi
+      - name: Crear pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Merge feature branch containing keyword"
+          title: "Solicitud desde feature" 
+          body: |
+            Solicitud de pull automatica, feature terminada
+          labels: |
+            finalizado
+          base: develop
