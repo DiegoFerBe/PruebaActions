@@ -8,6 +8,8 @@ from datetime import date
 
 class LogicaCaja(FachadaCajaDeSeguridad):
 
+
+
     def dar_clave(self, nombre_clave):
         pass
 
