@@ -2,7 +2,7 @@ name: Pruebas
 on:
   push:
     branches:
-      [develop]
+      [feature_caso6]
 jobs:
   pruebas:
     runs-on: ubuntu-latest
