@@ -38,8 +38,3 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
         source-branch: release-notes
         target-branch: main
-    - name: Delete Release Branch
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      run: |
-        git push origin --delete release-notes
