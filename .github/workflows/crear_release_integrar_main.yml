@@ -40,4 +40,4 @@ jobs:
         target-branch: main
     - name: Delete Release Branch
       run: |
-        git push origin --delete release
+        git push origin --delete release-notes
