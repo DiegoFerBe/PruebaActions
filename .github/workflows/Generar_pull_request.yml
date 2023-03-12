@@ -26,3 +26,10 @@ jobs:
       run: |
           coverage run -m unittest tests/TestLogicaCaja.py
           coverage report -m
+    - name: Merge to develop
+      if: success()
+      uses: devmasx/merge-branch@master
+      with:
+        type: now
+        target_branch: uat
+        github_token: ${{ github.token }}
