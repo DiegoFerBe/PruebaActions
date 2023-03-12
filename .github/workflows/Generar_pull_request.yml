@@ -26,9 +26,8 @@ jobs:
       run: |
           coverage run -m unittest tests/TestLogicaCaja.py
           coverage report -m
-    - name: Merge to develop
-      if: success()
+    - name: Merge feature into develop
+      if: ${{ success() }}
       run: |
         git checkout develop
-        git merge --no-ff feature_action-branch -m "Merge branch 'feature_action-branch'"
-        git push origin develop
+        git merge feature
