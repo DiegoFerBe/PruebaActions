@@ -9,31 +9,6 @@ from datetime import date
 class LogicaCaja(FachadaCajaDeSeguridad):
 
 
-    def dar_clave(self, nombre_clave):
-        pass
-
-    def eliminar_elemento(self, id):
-        pass
-
-    def validar_crear_editar_login(self, id, nombre, email, usuario, password, url, notas):
-        pass
-
-    def editar_login(self, id, nombre, email, usuario, password, url, notas):
-        pass
-
-    def crear_id(self, nombre_elemento, numero, nombre_completo, fnacimiento, fexpedicion, fvencimiento, notas):
-        pass
-
-    def validar_crear_editar_id(self, id, nombre_elemento, numero, nombre_completo, fnacimiento, fexpedicion,
-                                fvencimiento, notas):
-        pass
-
-    def editar_id(self, id, nombre_elemento, numero, nombre_completo, fnacimiento, fexpedicion, fvencimiento, notas):
-        pass
-
-    def crear_tarjeta(self, nombre_elemento, numero, titular, fvencimiento, ccv, clave, direccion, telefono, notas):
-        pass
-
     def validar_crear_editar_tarjeta(self, id, nombre_elemento, numero, titular, fvencimiento, ccv, clave, direccion,
                                      telefono, notas):
         pass
