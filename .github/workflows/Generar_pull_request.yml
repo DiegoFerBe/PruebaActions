@@ -4,12 +4,6 @@ on:
     branches:
       - feature**
 
-permissions:
-  contents: read
-  pull-requests: write
-  packages: read
-  issues: write
-
 jobs:
   pruebas:
     runs-on: ubuntu-latest
