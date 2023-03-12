@@ -2,7 +2,7 @@ name: Pruebas
 on:
   push:
     branches:
-      - 'feature_/**'
+      - 'feature_/*'
 jobs:
   pruebas:
     runs-on: ubuntu-latest
