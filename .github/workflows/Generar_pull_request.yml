@@ -1,8 +1,9 @@
-name: Pruebas
+name: Comprobando feature realizada
 on:
   push:
     branches:
-      [feature_action]
+      - feature**
+
 jobs:
   pruebas:
     runs-on: ubuntu-latest
@@ -26,3 +27,9 @@ jobs:
       run: |
           coverage run -m unittest tests/TestLogicaCaja.py
           coverage report -m
+    - name: Merge ${{ github.ref }} -> develop
+      uses: tukasz/direct-merge-action@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        source-branch: ${{ github.ref }}
+        target-branch: develop
