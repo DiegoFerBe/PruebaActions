@@ -195,9 +195,15 @@ class LogicaCaja(FachadaCajaDeSeguridad):
                         masdetres = True
                         break
 
-        SC = ((cantClaves - inseguras) / cantClaves) * 100
+        if (cantClaves == 0):
+            SC = 0
+        else:
+            SC = ((cantClaves - inseguras) / cantClaves) * 100
 
-        V = ((cantIdentificaciones + cantTarjetas - avencer) / cantIdentificaciones + cantTarjetas) * 100
+        if (cantIdentificaciones + cantTarjetas == 0):
+            V = 0
+        else:
+            V = ((cantIdentificaciones + cantTarjetas - avencer) / cantIdentificaciones + cantTarjetas) * 100
 
         R = 100
 
