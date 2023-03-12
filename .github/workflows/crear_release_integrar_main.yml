@@ -33,6 +33,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         branch: 'release'
+    - name: Cambiar a release para test
+      id: test-release
+      run: git checkout release
     - name: Correr pruebas ${{ github.ref }}
       id: pruebas-integracion
       run: python -m unittest -v tests/TestLogicaCaja.py
