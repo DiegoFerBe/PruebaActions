@@ -5,10 +5,10 @@ from .declarative_base import Base
 
 
 class Tipo(enum.Enum):
-    LOGIN = 1
-    TARJETA = 2
-    SECRETO = 3
-    ID = 4
+    LOGIN = 'Login'
+    TARJETA = 'Tarjeta'
+    SECRETO = 'Secreto'
+    ID = 'Identificacion'
 
 
 class Elemento(Base):
@@ -18,3 +18,6 @@ class Elemento(Base):
     nombre = Column(String)
     tipo = Column(Enum(Tipo))
     nota = Column(String)
+
+    def __str__(self):
+        return f'{self.id} {self.nombre} {self.tipo} '
